@@ -5,8 +5,15 @@
 
 package main
 
-import "fmt"
+import (
+	"github.com/DanteSu/miniblog/internal/miniblog"
+	_ "go.uber.org/automaxprocs"
+	"os"
+)
 
 func main() {
-	fmt.Println("Hello 123miniblog1231!777")
+	command := miniblog.NewMiniBlogCommand()
+	if err := command.Execute(); err != nil {
+		os.Exit(1)
+	}
 }
