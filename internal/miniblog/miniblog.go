@@ -1,9 +1,16 @@
+// Copyright 2025 Innkeeper DanteSu(苏孟君) <mengjunsu@163.com>. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file. The original repo for
+// this file is https://github.com/DanteSu/miniblog
+
 package miniblog
 
 import (
 	"fmt"
 	"github.com/spf13/cobra"
 )
+
+var cfgFile string
 
 // NewMiniBlogCommand create a *cobra.Command object. after, we can use Command object's Execute func to startup the service.
 func NewMiniBlogCommand() *cobra.Command {
@@ -28,6 +35,12 @@ func NewMiniBlogCommand() *cobra.Command {
 			return nil
 		},
 	}
+
+	cobra.OnInitialize(initConfig)
+
+	cmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "The path to the miniblog configuration file. Empty string for no configuration file.")
+
+	cmd.Flags().BoolP("toggle", "t", false, "Print the version number.")
 
 	return cmd
 }
