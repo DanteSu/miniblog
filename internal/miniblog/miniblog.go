@@ -8,6 +8,7 @@ package miniblog
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/DanteSu/miniblog/internal/pkg/log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -24,6 +25,8 @@ func NewMiniBlogCommand() *cobra.Command {
 		SilenceUsage: true,
 		// when cmd.Execute(), call this run fuc
 		RunE: func(cmd *cobra.Command, args []string) error {
+			log.Init(logOptions())
+			defer log.Sync()
 			return run()
 		},
 		// when command runs, do not need to indicate command line parameter
@@ -51,8 +54,8 @@ func NewMiniBlogCommand() *cobra.Command {
 func run() error {
 	// 打印所有的配置项及其值
 	settings, _ := json.Marshal(viper.AllSettings())
-	fmt.Println(string(settings))
+	log.Infow(string(settings))
 	// 打印 db -> username 配置项的值
-	fmt.Println(viper.GetString("db.username"))
+	log.Infow(viper.GetString("db.username"))
 	return nil
 }
