@@ -9,6 +9,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/DanteSu/miniblog/internal/pkg/log"
+	"github.com/DanteSu/miniblog/pkg/version/verflag"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -25,6 +26,7 @@ func NewMiniBlogCommand() *cobra.Command {
 		SilenceUsage: true,
 		// when cmd.Execute(), call this run fuc
 		RunE: func(cmd *cobra.Command, args []string) error {
+			verflag.PrintAndExitIfRequested()
 			log.Init(logOptions())
 			defer log.Sync()
 			return run()
@@ -46,6 +48,8 @@ func NewMiniBlogCommand() *cobra.Command {
 	cmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "The path to the miniblog configuration file. Empty string for no configuration file.")
 
 	cmd.Flags().BoolP("toggle", "t", false, "Print the version number.")
+
+	verflag.AddFlags(cmd.PersistentFlags())
 
 	return cmd
 }
