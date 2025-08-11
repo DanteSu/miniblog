@@ -7,11 +7,14 @@ package miniblog
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/DanteSu/miniblog/internal/pkg/log"
 	"github.com/DanteSu/miniblog/pkg/version/verflag"
+	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"net/http"
 )
 
 var cfgFile string
@@ -56,6 +59,25 @@ func NewMiniBlogCommand() *cobra.Command {
 
 // real entrypoint for service
 func run() error {
+	// 设置gin模式
+	gin.SetMode(viper.GetString("runmode"))
+
+	g := gin.New()
+
+	g.NoRoute(func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"code": 10003, "message": "Page not found."})
+	})
+
+	g.GET("/healthz", func(c *gin.Context) { c.JSON(http.StatusOK, gin.H{"status": "ok"}) })
+
+	// http server实例
+	httpsrv := &http.Server{Addr: viper.GetString("addr"), Handler: g}
+
+	log.Infow("Start to listening the incoming requests on http address", "addr", viper.GetString("addr"))
+	if err := httpsrv.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
+		log.Fatalw(err.Error())
+	}
+
 	// 打印所有的配置项及其值
 	settings, _ := json.Marshal(viper.AllSettings())
 	log.Infow(string(settings))
