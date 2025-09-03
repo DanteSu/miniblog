@@ -66,6 +66,11 @@ func NewMiniBlogCommand() *cobra.Command {
 
 // real entrypoint for service
 func run() error {
+	// 初始化 store 层
+	if err := initStore(); err != nil {
+		return err
+	}
+
 	// 设置gin模式
 	gin.SetMode(viper.GetString("runmode"))
 
