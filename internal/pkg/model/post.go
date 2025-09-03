@@ -1,5 +1,7 @@
 package model
 
+import "time"
+
 type PostM struct {
 	Content   string    `gorm:"column:content"`        //
 	CreatedAt time.Time `gorm:"column:createdAt"`      //

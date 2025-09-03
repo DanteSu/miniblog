@@ -6,11 +6,14 @@ require (
 	github.com/gin-gonic/gin v1.10.1
 	github.com/google/uuid v1.6.0
 	github.com/gosuri/uitable v0.0.4
+	github.com/jinzhu/copier v0.4.0
 	github.com/spf13/cobra v1.6.1
 	github.com/spf13/pflag v1.0.6
 	github.com/spf13/viper v1.20.1
 	go.uber.org/automaxprocs v1.6.0
 	go.uber.org/zap v1.27.0
+	gorm.io/driver/mysql v1.6.0
+	gorm.io/gorm v1.30.2
 )
 
 require (
@@ -57,6 +60,4 @@ require (
 	golang.org/x/text v0.21.0 // indirect
 	google.golang.org/protobuf v1.36.1 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	gorm.io/driver/mysql v1.6.0 // indirect
-	gorm.io/gorm v1.30.2 // indirect
 )

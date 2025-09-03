@@ -1,5 +1,7 @@
 package model
 
+import "time"
+
 type UserM struct {
 	CreatedAt time.Time `gorm:"column:createdAt"`      //
 	Email     string    `gorm:"column:email"`          //
