@@ -7,9 +7,10 @@ package miniblog
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/DanteSu/miniblog/internal/pkg/core"
+	"github.com/DanteSu/miniblog/internal/pkg/errno"
 	"github.com/DanteSu/miniblog/internal/pkg/log"
 	mw "github.com/DanteSu/miniblog/internal/pkg/middleware"
 	"github.com/DanteSu/miniblog/pkg/version/verflag"
@@ -75,13 +76,14 @@ func run() error {
 
 	g.Use(mws...)
 
+	// 注册 404 Handler.
 	g.NoRoute(func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"code": 10003, "message": "Page not found."})
+		core.WriteResponse(c, errno.ErrPageNotFound, nil)
 	})
 
 	g.GET("/healthz", func(c *gin.Context) {
 		log.C(c).Infow("Healthz function called")
-		c.JSON(http.StatusOK, gin.H{"status": "ok"})
+		core.WriteResponse(c, nil, map[string]string{"status": "ok"})
 	})
 
 	// http server实例
@@ -113,9 +115,9 @@ func run() error {
 	log.Infow("Server exiting")
 
 	// 打印所有的配置项及其值
-	settings, _ := json.Marshal(viper.AllSettings())
-	log.Infow(string(settings))
+	//settings, _ := json.Marshal(viper.AllSettings())
+	//log.Infow(string(settings))
 	// 打印 db -> username 配置项的值
-	log.Infow(viper.GetString("db.username"))
+	//log.Infow(viper.GetString("db.username"))
 	return nil
 }
