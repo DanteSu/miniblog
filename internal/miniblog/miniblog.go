@@ -6,15 +6,21 @@
 package miniblog
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/DanteSu/miniblog/internal/pkg/log"
+	mw "github.com/DanteSu/miniblog/internal/pkg/middleware"
 	"github.com/DanteSu/miniblog/pkg/version/verflag"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 )
 
 var cfgFile string
@@ -64,19 +70,47 @@ func run() error {
 
 	g := gin.New()
 
+	// gin.Recovery() 中间件，用来捕获任何 panic，并恢复
+	mws := []gin.HandlerFunc{gin.Recovery(), mw.NoCache, mw.Cors, mw.Secure, mw.RequestID()}
+
+	g.Use(mws...)
+
 	g.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"code": 10003, "message": "Page not found."})
 	})
 
-	g.GET("/healthz", func(c *gin.Context) { c.JSON(http.StatusOK, gin.H{"status": "ok"}) })
+	g.GET("/healthz", func(c *gin.Context) {
+		log.C(c).Infow("Healthz function called")
+		c.JSON(http.StatusOK, gin.H{"status": "ok"})
+	})
 
 	// http server实例
 	httpsrv := &http.Server{Addr: viper.GetString("addr"), Handler: g}
 
 	log.Infow("Start to listening the incoming requests on http address", "addr", viper.GetString("addr"))
-	if err := httpsrv.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
-		log.Fatalw(err.Error())
+	go func() {
+		if err := httpsrv.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
+			log.Fatalw(err.Error())
+		}
+	}()
+	// 等待中断信号优雅关闭服务器
+	quit := make(chan os.Signal)
+	// kill 默认会发送 syscall.SIGTERM 信号
+	// kill -2 发送 syscall.SIGINT 信号，我们常用的 CTRL + C 就是触发系统 SIGINT 信号
+	// kill -9 发送 syscall.SIGKILL 信号，但是不能被捕获，所以不需要添加它
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	<-quit
+	log.Infow("Shutting down server ...")
+	// 创建 ctx 用于通知服务器 goroutine, 它有 10 秒时间完成当前正在处理的请求
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	if err := httpsrv.Shutdown(ctx); err != nil {
+		log.Errorw("Insecure Server forced to shutdown", "err", err)
+		return err
 	}
+
+	log.Infow("Server exiting")
 
 	// 打印所有的配置项及其值
 	settings, _ := json.Marshal(viper.AllSettings())
