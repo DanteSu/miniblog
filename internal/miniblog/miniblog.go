@@ -9,8 +9,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/DanteSu/miniblog/internal/pkg/core"
-	"github.com/DanteSu/miniblog/internal/pkg/errno"
 	"github.com/DanteSu/miniblog/internal/pkg/log"
 	mw "github.com/DanteSu/miniblog/internal/pkg/middleware"
 	"github.com/DanteSu/miniblog/pkg/version/verflag"
@@ -81,15 +79,9 @@ func run() error {
 
 	g.Use(mws...)
 
-	// 注册 404 Handler.
-	g.NoRoute(func(c *gin.Context) {
-		core.WriteResponse(c, errno.ErrPageNotFound, nil)
-	})
-
-	g.GET("/healthz", func(c *gin.Context) {
-		log.C(c).Infow("Healthz function called")
-		core.WriteResponse(c, nil, map[string]string{"status": "ok"})
-	})
+	if err := installRouters(g); err != nil {
+		return err
+	}
 
 	// http server实例
 	httpsrv := &http.Server{Addr: viper.GetString("addr"), Handler: g}
