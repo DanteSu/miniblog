@@ -1,6 +1,7 @@
 package model
 
 import (
+	"github.com/DanteSu/miniblog/pkg/auth"
 	"gorm.io/gorm"
 	"time"
 )
