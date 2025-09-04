@@ -6,6 +6,7 @@ import (
 	"github.com/DanteSu/miniblog/internal/pkg/core"
 	"github.com/DanteSu/miniblog/internal/pkg/errno"
 	"github.com/DanteSu/miniblog/internal/pkg/log"
+	mw "github.com/DanteSu/miniblog/internal/pkg/middleware"
 	"github.com/gin-gonic/gin"
 )
 
@@ -25,6 +26,8 @@ func installRouters(g *gin.Engine) error {
 
 	uc := user.New(store.S)
 
+	g.POST("/login", uc.Login)
+
 	// 创建 v1 路由分组
 	v1 := g.Group("/v1")
 	{
@@ -32,6 +35,8 @@ func installRouters(g *gin.Engine) error {
 		userv1 := v1.Group("/users")
 		{
 			userv1.POST("", uc.Create)
+			userv1.PUT(":name/change-password", uc.ChangePassword)
+			userv1.Use(mw.Authn())
 		}
 	}
 
