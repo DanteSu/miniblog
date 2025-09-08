@@ -86,16 +86,12 @@ func run() error {
 	if err := installRouters(g); err != nil {
 		return err
 	}
+	// 创建并运行 HTTP 服务器
+	httpsrv := startInsecureServer(g)
 
-	// http server实例
-	httpsrv := &http.Server{Addr: viper.GetString("addr"), Handler: g}
+	// 创建并运行 HTTPS 服务器
+	httpssrv := startSecureServer(g)
 
-	log.Infow("Start to listening the incoming requests on http address", "addr", viper.GetString("addr"))
-	go func() {
-		if err := httpsrv.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
-			log.Fatalw(err.Error())
-		}
-	}()
 	// 等待中断信号优雅关闭服务器
 	quit := make(chan os.Signal)
 	// kill 默认会发送 syscall.SIGTERM 信号
@@ -113,6 +109,11 @@ func run() error {
 		return err
 	}
 
+	if err := httpssrv.Shutdown(ctx); err != nil {
+		log.Errorw("Secure Server forced to shutdown", "err", err)
+		return err
+	}
+
 	log.Infow("Server exiting")
 
 	// 打印所有的配置项及其值
@@ -121,4 +122,38 @@ func run() error {
 	// 打印 db -> username 配置项的值
 	//log.Infow(viper.GetString("db.username"))
 	return nil
+}
+
+// startInsecureServer 创建并运行 HTTP 服务器.
+func startInsecureServer(g *gin.Engine) *http.Server {
+	//创建http server实例
+	httpsrv := &http.Server{Addr: viper.GetString("addr"), Handler: g}
+	// 运行 HTTP 服务器。在 goroutine 中启动服务器，它不会阻止下面的正常关闭处理流程
+	// 打印一条日志，用来提示 HTTP 服务已经起来，方便排障
+	log.Infow("Starting to listen to incoming requests on the HTTP address", "addr", viper.GetString("addr"))
+	go func() {
+		if err := httpsrv.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
+			log.Fatalw(err.Error())
+		}
+	}()
+
+	return httpsrv
+}
+
+// startSecureServer 创建并运行 HTTPS 服务器.
+func startSecureServer(g *gin.Engine) *http.Server {
+	// 创建 HTTPS Server 实例
+	httpssrv := &http.Server{Addr: viper.GetString("tls.addr"), Handler: g}
+	// 运行 HTTPS 服务器。在 goroutine 中启动服务器，它不会阻止下面的正常关闭处理流程
+	// 打印一条日志，用来提示 HTTPS 服务已经起来，方便排障
+	log.Infow("Starting to listen to the incoming requests on https address", "addr", viper.GetString("tls.addr"))
+	cert, key := viper.GetString("tls.cert"), viper.GetString("tls.key")
+	if cert != "" && key != "" {
+		go func() {
+			if err := httpssrv.ListenAndServeTLS(cert, key); err != nil && !errors.Is(err, http.ErrServerClosed) {
+				log.Fatalw(err.Error())
+			}
+		}()
+	}
+	return httpssrv
 }

@@ -1,0 +1,81 @@
+2025-09-02 16:57:45	info	miniblog/miniblog.go:85	Start to listening the incoming requests on http address	{"addr": ":8080"}
+2025-09-02 16:59:47	info	miniblog/miniblog.go:78	Healthz function called	{"X-Request-ID": "df3ec22a-5483-416c-b693-25f0394f37d3"}
+2025-09-03 10:01:11	info	miniblog/miniblog.go:78	Healthz function called	{"X-Request-ID": "8c4c93d8-e777-4537-9a19-99e1a4b6e5a4"}
+2025-09-03 10:01:12	info	miniblog/miniblog.go:78	Healthz function called	{"X-Request-ID": "e4e9e1d2-e6ce-4777-8136-5b8d0cd56e21"}
+2025-09-03 10:01:13	info	miniblog/miniblog.go:78	Healthz function called	{"X-Request-ID": "3d957079-6818-4904-ab78-01c1caf9e06d"}
+2025-09-03 10:01:13	info	miniblog/miniblog.go:78	Healthz function called	{"X-Request-ID": "e37eb550-117c-4dab-80c9-057f875703a1"}
+2025-09-03 10:01:14	info	miniblog/miniblog.go:78	Healthz function called	{"X-Request-ID": "eadb5bba-c71d-4e4f-aa89-ab2f286ddaa4"}
+2025-09-03 10:02:35	info	miniblog/miniblog.go:85	Start to listening the incoming requests on http address	{"addr": ":8080"}
+2025-09-03 10:02:42	info	miniblog/miniblog.go:78	Healthz function called	{"X-Request-ID": "7ace9c25-7c5e-44a7-8c19-653ce877d0a1"}
+2025-09-03 10:02:46	info	miniblog/miniblog.go:78	Healthz function called	{"X-Request-ID": "6bc6af73-7176-4a11-aebf-51603c6764ce"}
+2025-09-03 11:13:06	info	miniblog/miniblog.go:90	Start to listening the incoming requests on http address	{"addr": ":8080"}
+2025-09-03 11:13:14	info	miniblog/miniblog.go:103	Shutting down server ...
+2025-09-03 11:13:14	info	miniblog/miniblog.go:113	Server exiting
+2025-09-03 11:13:14	info	miniblog/miniblog.go:117	{"addr":":8080","db":{"database":"miniblog","host":"127.0.0.1","log-level":4,"max-connection-life-time":"10s","max-idle-connections":100,"max-open-connections":100,"password":"miniblog1234","username":"miniblog"},"log":{"disable-caller":false,"disable-stacktrace":false,"format":"console","level":"debug","output-paths":[".\\tmp\\miniblog.log","stdout"]}}
+2025-09-03 11:13:14	info	miniblog/miniblog.go:119	miniblog
+2025-09-03 11:24:45	info	miniblog/miniblog.go:90	Start to listening the incoming requests on http address	{"addr": ":8080"}
+2025-09-03 11:24:47	info	miniblog/miniblog.go:103	Shutting down server ...
+2025-09-03 11:24:47	info	miniblog/miniblog.go:113	Server exiting
+2025-09-03 11:24:47	info	miniblog/miniblog.go:117	{"addr":":8080","db":{"database":"miniblog","host":"127.0.0.1","log-level":4,"max-connection-life-time":"10s","max-idle-connections":100,"max-open-connections":100,"password":"miniblog1234","username":"miniblog"},"log":{"disable-caller":false,"disable-stacktrace":false,"format":"console","level":"debug","output-paths":[".\\tmp\\miniblog.log","stdout"]}}
+2025-09-03 11:24:47	info	miniblog/miniblog.go:119	miniblog
+2025-09-03 15:21:59	info	miniblog/miniblog.go:92	Start to listening the incoming requests on http address	{"addr": ":8080"}
+2025-09-03 15:22:04	info	miniblog/miniblog.go:85	Healthz function called	{"X-Request-ID": "21350c33-43ff-4e05-a616-91043cb7b53b"}
+2025-09-03 15:22:05	info	miniblog/miniblog.go:85	Healthz function called	{"X-Request-ID": "ab745f09-267e-4983-8c65-0ada1f801c28"}
+2025-09-03 15:22:06	info	miniblog/miniblog.go:85	Healthz function called	{"X-Request-ID": "0f601b3d-1222-4aff-8d28-bef65c83c573"}
+2025-09-03 15:22:18	info	miniblog/miniblog.go:85	Healthz function called	{"X-Request-ID": "3c2d7c0b-36cb-4085-a59b-aa4315d9d01e"}
+2025-09-03 15:23:41	info	miniblog/miniblog.go:105	Shutting down server ...
+2025-09-03 15:23:41	info	miniblog/miniblog.go:115	Server exiting
+2025-09-04 11:01:05	info	miniblog/miniblog.go:89	Start to listening the incoming requests on http address	{"addr": ":8080"}
+2025-09-04 11:06:24	info	user/create.go:14	create user function called	{"X-Request-ID": "0326e9d7-da5c-4a1c-9421-a7abbf6c9cd8"}
+2025-09-04 11:06:58	info	user/create.go:14	create user function called	{"X-Request-ID": "391ebedb-a369-4200-a80a-d942f6437c82"}
+2025-09-04 13:47:27	info	miniblog/miniblog.go:102	Shutting down server ...
+2025-09-04 13:47:27	info	miniblog/miniblog.go:112	Server exiting
+2025-09-04 14:39:10	info	miniblog/miniblog.go:89	Start to listening the incoming requests on http address	{"addr": ":8080"}
+2025-09-04 14:39:19	info	user/create.go:14	create user function called	{"X-Request-ID": "7658f7f3-cd9b-49d5-8f0a-1cf944c20425"}
+2025-09-04 15:02:37	info	miniblog/miniblog.go:102	Shutting down server ...
+2025-09-04 15:02:37	info	miniblog/miniblog.go:112	Server exiting
+2025-09-04 17:17:58	info	miniblog/miniblog.go:93	Start to listening the incoming requests on http address	{"addr": ":8080"}
+2025-09-04 17:18:59	info	user/create.go:14	create user function called	{"X-Request-ID": "4f675da5-9067-47fb-9d55-91e13ac3a4a8"}
+2025-09-04 17:19:51	info	user/login.go:13	Login function called	{"X-Request-ID": "5d0dc059-f635-4510-a71d-0975f9e35a33"}
+2025-09-04 17:24:19	info	user/change_password.go:14	Change password function called	{"X-Request-ID": "d7097d58-52fa-4bde-812c-10acad8235d0"}
+2025-09-04 17:25:10	info	user/login.go:13	Login function called	{"X-Request-ID": "f02f956a-a6ac-4399-92cb-45ee2d308866"}
+2025-09-05 14:00:59	info	miniblog/miniblog.go:106	Shutting down server ...
+2025-09-05 14:00:59	info	miniblog/miniblog.go:116	Server exiting
+2025-09-05 16:26:40	info	miniblog/miniblog.go:93	Start to listening the incoming requests on http address	{"addr": ":8080"}
+2025-09-05 16:31:09	info	user/create.go:16	create user function called	{"X-Request-ID": "0706af50-c5ed-400a-aadb-a38fd1349b34"}
+2025-09-05 16:31:43	info	user/create.go:16	create user function called	{"X-Request-ID": "fe5b4281-2381-4613-956e-8507d9813273"}
+2025-09-05 16:33:06	info	user/login.go:13	Login function called	{"X-Request-ID": "83d7621c-04c2-47b5-b5dd-841e44302718"}
+2025-09-05 16:41:45	info	user/login.go:13	Login function called	{"X-Request-ID": "a35b60a6-a39d-44ac-b327-ef7f470e7c03"}
+2025-09-05 16:42:06	info	user/login.go:13	Login function called	{"X-Request-ID": "5a7603f0-6bbd-4123-80fd-4d7de8a36a84"}
+2025-09-05 16:42:12	info	user/login.go:13	Login function called	{"X-Request-ID": "be16e565-163d-4692-9dc1-db3fd8485c80"}
+2025-09-05 16:43:34	info	user/login.go:13	Login function called	{"X-Request-ID": "3bddc806-90e6-4497-b958-0e1dd007a543"}
+2025-09-05 16:43:46	info	user/login.go:13	Login function called	{"X-Request-ID": "2b7fc524-b0c3-4247-9947-f4a92c5ec7fb"}
+2025-09-05 16:44:01	info	user/login.go:13	Login function called	{"X-Request-ID": "2253c545-5105-4bad-a5e4-0d462bd26b3b"}
+2025-09-05 16:44:22	debug	middleware/authz.go:23	Build authorize context	{"sub": "belma", "obj": "/v1/users/belma", "act": "GET"}
+2025-09-05 16:44:22	info	user/get.go:11	Get user function called	{"X-Request-ID": "a11160e7-9c81-4526-8dd4-c3797470ae4e", "X-Username": "belma"}
+2025-09-05 16:44:43	debug	middleware/authz.go:23	Build authorize context	{"sub": "belma", "obj": "/v1/users/belmb", "act": "GET"}
+2025-09-05 16:53:53	info	miniblog/miniblog.go:106	Shutting down server ...
+2025-09-05 16:53:53	info	miniblog/miniblog.go:116	Server exiting
+2025-09-08 15:28:04	info	miniblog/miniblog.go:133	Starting to listen to incoming requests on the HTTP address	{"addr": ":8080"}
+2025-09-08 15:28:04	info	miniblog/miniblog.go:149	Starting to listen to the incoming requests on https address	{"addr": ":8443"}
+2025-09-08 15:28:07	debug	middleware/authz.go:23	Build authorize context	{"sub": "belma", "obj": "/v1/users/belmb", "act": "GET"}
+2025-09-08 15:34:53	info	miniblog/miniblog.go:102	Shutting down server ...
+2025-09-08 15:34:53	info	miniblog/miniblog.go:117	Server exiting
+2025-09-08 15:38:30	info	miniblog/miniblog.go:133	Starting to listen to incoming requests on the HTTP address	{"addr": ":8080"}
+2025-09-08 15:38:30	info	miniblog/miniblog.go:149	Starting to listen to the incoming requests on https address	{"addr": ":8443"}
+2025-09-08 15:38:32	info	user/create.go:16	create user function called	{"X-Request-ID": "a656b6c9-f345-41e9-a3bc-1a7a4453d440"}
+2025-09-08 15:39:12	info	user/login.go:13	Login function called	{"X-Request-ID": "ea2ec424-8b71-41a0-819a-b365537fb137"}
+2025-09-08 15:40:47	info	http/server.go:1983	http: TLS handshake error from 127.0.0.1:57181: EOF
+2025-09-08 15:42:03	info	http/server.go:1983	http: TLS handshake error from 127.0.0.1:50112: EOF
+2025-09-08 15:50:12	info	http/server.go:1983	http: TLS handshake error from 127.0.0.1:59047: EOF
+2025-09-08 15:50:23	info	http/server.go:1983	http: TLS handshake error from 127.0.0.1:58530: EOF
+2025-09-08 15:51:01	info	http/server.go:1983	http: TLS handshake error from 127.0.0.1:65055: EOF
+2025-09-08 15:51:03	info	http/server.go:1983	http: TLS handshake error from 127.0.0.1:65057: EOF
+2025-09-08 15:51:04	info	http/server.go:1983	http: TLS handshake error from 127.0.0.1:65058: EOF
+2025-09-08 15:51:04	info	http/server.go:1983	http: TLS handshake error from 127.0.0.1:50797: EOF
+2025-09-08 15:51:07	debug	middleware/authz.go:23	Build authorize context	{"sub": "catest", "obj": "/v1/users/catest", "act": "GET"}
+2025-09-08 15:51:07	info	user/get.go:11	Get user function called	{"X-Request-ID": "f315c04c-a504-44fa-b84c-ef3cc454303e", "X-Username": "catest"}
+2025-09-08 15:51:20	debug	middleware/authz.go:23	Build authorize context	{"sub": "catest", "obj": "/v1/users/catest", "act": "GET"}
+2025-09-08 15:51:20	info	user/get.go:11	Get user function called	{"X-Request-ID": "09566e22-fdaf-4d72-a22d-e47452c21845", "X-Username": "catest"}
+2025-09-08 15:52:14	info	miniblog/miniblog.go:102	Shutting down server ...
+2025-09-08 15:52:14	info	miniblog/miniblog.go:117	Server exiting
